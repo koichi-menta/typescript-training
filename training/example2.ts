@@ -1,24 +1,36 @@
-const func1 = (name: string, age: Number) => {
-  return `${name} は ${age} 歳です。`;
-};
-
-type func2Props = {
+/**
+ * オブジェクトにも型を付けることができます。
+ * 型の指定方法は2つあります。
+ * interfaceを使う方法と、typeを使う方法です。
+ */
+interface ObjPropsA {
   name: string;
-  age: Number;
-};
-const func2 = (value: func2Props) => {
-  return `${value.name} は ${value.age} 歳です。`;
-};
+  age: number;
+}
 
-// NOTE: このコメントを解除すると型エラーが起きます。
-// console.log("func1 =>", func1(100, "10"));
-console.log("func1 =>", func1("佐藤", 10));
-
-const obj: func2Props = {
-  name: "鈴木",
-  age: 10,
-  // NOTE: このコメントを解除すると型エラーが起きます。
-  // comment: "型を定義していないのでエラーがでます。",
+type ObjPropsB = {
+  name: string;
+  age: number;
 };
 
-console.log("func2 =>", func2(obj));
+const objA: ObjPropsA = {
+  name: "hoge",
+  age: 30,
+};
+
+const objB: ObjPropsB = objA;
+
+/**
+ * typeはオブジェクト以外の型も指定する事ができます。
+ * この書き方は「0」と「'hoge'」と「false」のみを代入できます。
+ */
+type TypeA = 0 | "hoge" | false;
+
+const tA: TypeA = 0;
+const tB: TypeA = "hoge";
+const tC: TypeA = false;
+
+// 下記コメントを解除するとエラーを確認できます。
+// const tD: TypeA = 100;
+
+console.log("objA =>", objA);
